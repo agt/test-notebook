@@ -22,5 +22,7 @@ USER jovyan
 
 RUN pip install --no-cache-dir networkx scipy
 
+mamba upgrade -y jupyterhub==3.*
+
 # Override command to disable running jupyter notebook at launch
 # CMD ["/bin/bash"]
