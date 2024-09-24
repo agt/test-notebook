@@ -50,7 +50,8 @@ jobs:
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       - name: After prune disk space
-        run: df
+        run: |
+          find / -xdev -type d -maxdepth 4 | xargs du -sh
 
       - name: Generate tags and labels
         id: meta
