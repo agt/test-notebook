@@ -47,11 +47,14 @@ jobs:
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "/usr/share/miniconda"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       - name: After prune disk space
         run: |
-          find / -xdev -type d -maxdepth 4 | xargs du -sh
+          sudo dpkg-query -Wf '${Installed-Size}\t${Package}\t${Section}\n' | sort -nr
+          df . -h
+          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr
 
       - name: Generate tags and labels
         id: meta
